@@ -39,7 +39,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-10 ">
+        <div class="col-md-12">
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -51,7 +51,44 @@
                             <label for="date">Select Date</label>
                            <input id="date" type="date" class="form-control" />  
                         </div>
-                       
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Student Id</th>
+                                        <th>Student Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            001
+                                        </td>
+                                        <td>
+                                            Md Ashanaur Rahman
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <div class="form-check mx-4">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Present
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mx-4">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Absent
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </form>
                 </div>
             </div>
