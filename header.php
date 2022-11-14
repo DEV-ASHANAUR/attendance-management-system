@@ -82,7 +82,7 @@ if(!isset($_SESSION['user_id'])){
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
                         <a class="collapse-item <?php if($sub_page == 'view_teacher'){echo 'active';}?>" href="view-teacher.php">View Teacher</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        
                     </div>
                 </div>
             </li>
@@ -130,7 +130,7 @@ if(!isset($_SESSION['user_id'])){
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <!-- <hr class="sidebar-divider"> -->
 
             
 

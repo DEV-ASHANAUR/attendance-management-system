@@ -61,6 +61,48 @@
                 return false;
             }
         }
+        //add teacher
+        public function addTeacher($name,$email,$designation,$role,$password){
+            $this->sql = "INSERT INTO `teacher`(`t_name`, `t_email`, `t_designation`, `password`, `role`) VALUES ('$name','$email','$designation','$password','$role')";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //view all teacer 
+        public function viewTeacher(){
+            $this->sql = "SELECT * FROM `teacher`";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //delete teacher
+        public function teacherDelete($id){
+            $id =$id;
+            $this->sql = "DELETE FROM `teacher` WHERE t_id = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //make and undo admin
+        public function makeAdmin($id,$role){
+            $this->sql = "UPDATE `teacher` SET `role`='$role' WHERE t_id = $id";
+            $this->result = $this->con->query($this->sql);
+            if($this->result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
     }
 
     // $obj = new Main();

@@ -27,17 +27,17 @@
             }
             $_SESSION['msg']['pass_error'] = $msg;
         }
-        public static function import_succ($msg){
+        public static function addTeacher($msg){
             if(!isset($_SESSION['msg'])){
                 $_SESSION['msg'] = array(); 
             }
-            $_SESSION['msg']['import'] = $msg;
+            $_SESSION['msg']['addTeacher'] = $msg;
         }
-        public static function import_error($msg){
+        public static function teacherError($msg){
             if(!isset($_SESSION['msg'])){
                 $_SESSION['msg'] = array(); 
             }
-            $_SESSION['msg']['import_error'] = $msg;
+            $_SESSION['msg']['teacher_error'] = $msg;
         }
     }
 
