@@ -1,7 +1,10 @@
 <?php
-$page = "manage_class";
-$sub_page = "view_class";
+    $page = "manage_class";
+    $sub_page = "view_class";
     include("header.php");
+    include "main.php";
+    $obj = new Main();
+    $data = $obj->viewClass();
 ?>
 
 <!-- Begin Page Content -->
@@ -17,12 +20,30 @@ $sub_page = "view_class";
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">View Class</h6>
                 </div>
+                <?php
+                    if(isset($_SESSION['msg']['addTeacher'])){
+                        ?>
+                            <script type="text/javascript">
+                                toastr.success("<?php echo Flass_data::show_error();?>");
+                            </script>
+                        <?php 
+                        }
+                    ?>
+                    <?php
+                    if(isset($_SESSION['msg']['teacher_error'])){
+                        ?>
+                            <script type="text/javascript">
+                                toastr.error("<?php echo Flass_data::show_error();?>");
+                            </script>
+                        <?php 
+                    }
+                ?>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Class Id</th>
+                                    <th>SL No</th>
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Action</th>
@@ -30,32 +51,32 @@ $sub_page = "view_class";
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Class Id</th>
+                                    <th>SL No</th>
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-primary">Update</a>
-                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-primary">Update</a>
-                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                
+                                <?php
+                                    if($data->num_rows > 0){
+                                        $i = 1;
+                                        while($row = $data->fetch_object()){
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $i; ?></td>
+                                                    <td><?php echo $row->class_name; ?></td>
+                                                    <td><?php echo $row->class_description; ?></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-sm btn-primary">Update</a>
+                                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                            $i++;
+                                        }
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -68,17 +89,17 @@ $sub_page = "view_class";
                     <h6 class="m-0 font-weight-bold text-primary">Add class</h6>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="add-class.php" method="post">
                         <div class="form-group">
                             <label for="name">Class Name</label>
-                            <input type="text"  class="form-control" placeholder="CLass Name" />
+                            <input type="text" name="class_name" class="form-control" placeholder="CLass Name" />
                         </div>
                         <div class="form-group">
                             <label for="name">Description</label>
-                            <textarea name="description" class="form-control" rows="5" placeholder="Enter Description"></textarea>
+                            <textarea name="class_description" class="form-control" rows="5" placeholder="Enter Description"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="submit"  class="btn btn-success"  />
+                            <input type="submit" name="submit" class="btn btn-success"  />
                         </div>
                     </form>
                 </div>

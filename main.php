@@ -122,8 +122,29 @@
                 return false;
             }
         }
+        //view batch
         public function viewBatch(){
             $this->sql = "SELECT * FROM `batch`";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //add class
+        public function addClass($class_name,$description){
+            $this->sql = "INSERT INTO `class`(`class_name`, `class_description`) VALUES ('$class_name','$description')";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //view class
+        public function viewClass(){
+            $this->sql = "SELECT * FROM `class`";
             $this->result = $this->con->query($this->sql);
             if($this->result == true){
                 return $this->result;
