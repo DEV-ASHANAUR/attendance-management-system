@@ -74,8 +74,6 @@
                                         }
                                     }
                                 ?>
-                                
-                                
                             </tbody>
                         </table>
                     </div>
@@ -91,7 +89,7 @@
                     <form action="add-batch.php" method="post">
                         <div class="form-group">
                             <label for="name">Batch Id</label>
-                            <input type="text" name="batchId" class="form-control" placeholder="Batch Id" />
+                            <input type="text" name="batchId" class="form-control" placeholder="Batch Id" required />
                         </div>
                         <div class="form-group">
                             <label for="name">Description</label>

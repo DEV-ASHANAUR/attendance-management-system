@@ -2,6 +2,21 @@
     $page = "manage_attendance";
     $sub_page = "attendance";
     include("header.php");
+    include("main.php");
+    $obj = new Main();
+    
+    $batch = $obj->viewBatch();
+    $class = $obj->viewClass();
+    $class_2 = $obj->viewClass();
+    $shuter = false;
+    if(isset($_GET['class_id']) && isset($_GET['batch_id'])){
+        $class_id = $_GET['class_id'];
+        $batch_id = $_GET['batch_id'];
+        $find = $obj->findStudent($batch_id,$class_id);
+        $shuter = true;
+    }
+    
+
 ?>
 
 <!-- Begin Page Content -->
@@ -9,7 +24,6 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Manage Attendance</h1>
-
     <div class="row">
         <div class="col-md-7">
             <!-- DataTales Example -->
@@ -17,16 +31,53 @@
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Load Student</h6>
                 </div>
+                <?php
+                    if(isset($_SESSION['msg']['addTeacher'])){
+                        ?>
+                            <script type="text/javascript">
+                                toastr.success("<?php echo Flass_data::show_error();?>");
+                            </script>
+                        <?php 
+                        }
+                    ?>
+                    <?php
+                    if(isset($_SESSION['msg']['teacher_error'])){
+                        ?>
+                            <script type="text/javascript">
+                                toastr.error("<?php echo Flass_data::show_error();?>");
+                            </script>
+                        <?php 
+                    }
+                ?>
                 <div class="card-body">
-                    <form action="">
+                    <form action="#" method="GET">
                         <div class="form-group">
-                            <label for="">Select Class</label>
-                            <select name="" class="form-control" id="">
-                                <option value="">one</option>
-                                <option value="">two</option>
-                                <option value="">three</option>
-                                <option value="">four</option>
-                                <option value="">five</option>
+                            <label for="batch">Select Class</label>
+                            <select name="class_id" class="form-control" id="batch">
+                            <?php
+                                    if($class->num_rows>0){
+                                        while($cal = $class->fetch_object()){
+                                            ?>
+                                                <option value="<?php echo $cal->class_id; ?>"><?php echo $cal->class_name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Select Batch</label>
+                            <select name="batch_id" class="form-control" id="class" required>
+                                <?php
+                                    if($batch->num_rows>0){
+                                        while($bat = $batch->fetch_object()){
+                                            ?>
+                                                <option value="<?php echo $bat->batch_id; ?>"><?php echo $bat->batch_id; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                ?>
+                                
                             </select>
                         </div>
                         <div class="form-group">
@@ -38,18 +89,34 @@
         </div>
     </div>
 
-    <div class="row">
+    <?php
+        if($shuter == true){
+            ?>
+            <div class="row">
         <div class="col-md-12">
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Take Attendance</h6>
+                <div class="card-header py-3 text-primary">
+                    <h6 class="m-0 font-weight-bold">Take Attendance (<?php echo $find->num_rows; ?>) </h6>
+                    <h6 class="mt-1">
+                        Class :
+                        <?php
+                            if($class_2->num_rows > 0){
+                                while($call = $class_2->fetch_object()){
+                                    if($call->class_id == $class_id){
+                                        echo $call->class_name;
+                                    }
+                                }
+                            }
+                        ?>
+                    </h6>
+                    <h6>Batch : <?php echo $batch_id; ?></h6>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="present.php" method="post">
                         <div class="form-group">
                             <label for="date">Select Date</label>
-                           <input id="date" type="date" class="form-control" />  
+                           <input id="date" name="date" type="date" class="form-control" required />  
                         </div>
                         <div class="table-responsive">
                             <table class="table text-center">
@@ -61,39 +128,59 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                        if($find->num_rows>0){
+                                            $c = 1;
+                                            while($row = $find->fetch_object()){
+                                                ?>
                                     <tr>
                                         <td>
-                                            001
+                                            <?php echo $row->s_id; ?>
                                         </td>
                                         <td>
-                                            Md Ashanaur Rahman
+                                            <?php echo $row->s_name; ?>
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                    <input class="form-check-input" type="radio" name="<?php echo $c;?>" value="<?php echo $row->s_id;?>" id="<?php echo $row->s_id;?>" />
+                                                    <label class="form-check-label" for="<?php echo $row->s_id;?>">
                                                         Present
                                                     </label>
                                                 </div>
                                                 <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="<?php echo $c;?>" id="<?php echo $row->s_id."a";?>" value="absent" checked />
+                                                    <label class="form-check-label" for="<?php echo $row->s_id."a";?>">
                                                         Absent
                                                     </label>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    
+                                                <?php
+                                                $c++;
+                                            }
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
+                            <input type="hidden" value="<?php echo $c; ?>" name="total" />
+                            <input type="hidden" value="<?php echo $batch_id; ?>" name="batch_id" />
+                            <input type="hidden" value="<?php echo $class_id; ?>" name="class_id" />
+                            <div class="d-flex justify-content-between">
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+            <?php
+        }
+    
+    ?>
 
 </div>
 <!-- /.container-fluid -->

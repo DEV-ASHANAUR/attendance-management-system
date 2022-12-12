@@ -182,6 +182,36 @@
                 return false;
             }
         }
+        //check present 
+        public function checkPresent($date,$batch_id,$class_id){
+            $this->sql = "SELECT * FROM `present` WHERE p_date = '$date' AND batch_id = '$batch_id' AND class_id = '$class_id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //take present
+        public function takePresent($date,$present,$batch_id,$class_id){
+            $this->sql = "INSERT INTO `present`(`present`, `batch_id`, `class_id`, `p_date`) VALUES ('$present','$batch_id','$class_id','$date')";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //update present
+        public function updatePresent($date,$present,$batch_id,$class_id){
+            $this->sql = "UPDATE `present` SET `present`='$present' WHERE p_date = '$date' AND batch_id = '$batch_id' AND class_id = '$class_id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
 
     }
 
