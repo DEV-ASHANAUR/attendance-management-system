@@ -4,7 +4,7 @@
     include("header.php");
     include "main.php";
     $obj = new Main();
-    $data = $obj->viewClass();
+    
 ?>
 
 <!-- Begin Page Content -->

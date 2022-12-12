@@ -152,6 +152,36 @@
                 return false;
             }
         }
+        //findStudent
+        public function findStudent($batch_id,$class_id){
+            $this->sql = "SELECT * FROM `student` WHERE batch_id = '$batch_id' AND class_id = '$class_id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //addStudent($studentId,$name,$father,$mother,$batch_id,$class_id,$phone)
+        public function addStudent($studentId,$name,$father,$mother,$batch_id,$class_id,$phone){
+            $this->sql = "INSERT INTO `student`(`s_id`, `s_name`, `s_father`, `s_mother`, `batch_id`, `class_id`, `phone`) VALUES ('$studentId','$name','$father','$mother','$batch_id','$class_id','$phone')";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function viewStudent(){
+            $this->sql = "SELECT s.s_id,s.s_name,s.s_father,s.s_mother,s.phone,b.batch_id,c.class_name FROM student as s INNER JOIN batch AS b ON s.batch_id = b.batch_id INNER JOIN class as c on s.class_id = c.class_id";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
 
     }
 
