@@ -81,7 +81,7 @@ if(!isset($_SESSION['user_id'])){
                 <div id="collapseTwo" class="collapse <?php if($page == 'manage_teacher'){echo 'show';}?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item <?php if($sub_page == 'view_teacher'){echo 'active';}?>" href="view-teacher.php">View Teacher</a>
+                        <a class="collapse-item <?php if($sub_page == 'view_teacher'){echo 'active';}?>" href="view-teacher.php">Teacher</a>
                         
                     </div>
                 </div>
@@ -96,7 +96,11 @@ if(!isset($_SESSION['user_id'])){
                 <div id="collapseThree" class="collapse <?php if($page == 'manage_class'){echo 'show';}?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item <?php if($sub_page == 'view_class'){echo 'active';}?>" href="view-class.php">View Class</a>
+                        <a class="collapse-item <?php if($sub_page == 'view_batch'){echo 'active';}?>" href="view-batch.php">Batch</a>
+
+                        <a class="collapse-item <?php if($sub_page == 'view_class'){echo 'active';}?>" href="view-class.php">Class</a>
+
+                        
                     </div>
                 </div>
             </li>

@@ -102,6 +102,35 @@
                 return false;
             }
         }
+        //add batch
+        public function addBatch($batchId,$description){
+            $this->sql = "INSERT INTO `batch`(`batch_id`, `description`) VALUES ('$batchId','$description')";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //find batch
+        public function findBatch($batchId){
+            $this->sql = "SELECT * FROM `batch` WHERE batch_id = '$batchId'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        public function viewBatch(){
+            $this->sql = "SELECT * FROM `batch`";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
 
     }
 
