@@ -20,7 +20,7 @@
 
         print_r($check);
 
-        if($check->num_rows>0){
+        if($check->num_rows > 0){
             $update = $obj->updatePresent($date,implode(",", $present),$batch_id,$class_id);
             if($update == true){
                 Flass_data::addTeacher('Attendance Update Successfully!');
