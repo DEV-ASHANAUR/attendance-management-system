@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 11:00 PM
+-- Generation Time: Dec 14, 2022 at 12:26 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -76,10 +76,10 @@ INSERT INTO `class` (`class_id`, `class_name`, `class_description`) VALUES
 
 CREATE TABLE `present` (
   `p_id` int(11) NOT NULL,
-  `present` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `p_date` date NOT NULL
+  `present` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `batch_id` int(11) DEFAULT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `p_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -87,9 +87,9 @@ CREATE TABLE `present` (
 --
 
 INSERT INTO `present` (`p_id`, `present`, `batch_id`, `class_id`, `p_date`) VALUES
-(1, '20180701,20180702,20180703', 2018, 7, '2022-12-13'),
-(4, '20180701,20180703,20180704', 2018, 7, '2022-12-14'),
-(5, '20180801,20180802,20180803,20180804', 2018, 8, '2022-12-13');
+(1, '20180701,20180702,20180703,20180704,20180705', 2018, 7, '2022-12-13'),
+(2, '20180701,20180703,20180704,20180705', 2018, 7, '2022-12-14'),
+(3, '20180701,20180702,20180704,20180705', 2018, 7, '2022-12-15');
 
 -- --------------------------------------------------------
 
@@ -144,8 +144,8 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`t_id`, `t_name`, `t_email`, `t_designation`, `password`, `role`, `created_at`) VALUES
-(2, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 1, '2022-11-13 23:50:38'),
-(3, 'akash', 'akash@gmail.com', 'Teacher', 'e10adc3949ba59abbe56e057f20f883e', 1, '2022-11-14 17:17:51'),
+(2, 'Md.Ashanaur', 'ashanur@gmail.com', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 1, '2022-11-13 23:50:38'),
+(3, 'akash', 'akash@gmail.com', 'Teacher', 'e10adc3949ba59abbe56e057f20f883e', 0, '2022-11-14 17:17:51'),
 (9, 'sappno', 'sappno@gmail.com', 'Teacher', 'c51ce410c124a10e0db5e4b97fc2af39', 1, '2022-11-14 17:32:26');
 
 --
@@ -169,7 +169,9 @@ ALTER TABLE `class`
 -- Indexes for table `present`
 --
 ALTER TABLE `present`
-  ADD PRIMARY KEY (`p_id`);
+  ADD PRIMARY KEY (`p_id`),
+  ADD KEY `batch_id` (`batch_id`),
+  ADD KEY `class_id` (`class_id`);
 
 --
 -- Indexes for table `student`
@@ -206,7 +208,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `present`
 --
 ALTER TABLE `present`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `teacher`
@@ -217,6 +219,13 @@ ALTER TABLE `teacher`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `present`
+--
+ALTER TABLE `present`
+  ADD CONSTRAINT `present_ibfk_1` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
+  ADD CONSTRAINT `present_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `class` (`class_id`);
 
 --
 -- Constraints for table `student`
