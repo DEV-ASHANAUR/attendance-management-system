@@ -1,6 +1,6 @@
 <?php
    $page = "manage_attendance";
-   $sub_page = "attendance";
+   $sub_page = "view_attendance";
    include("header.php");
    include("main.php");
    $obj = new Main();
@@ -9,7 +9,7 @@
    $class = $obj->viewClass();
    $class_2 = $obj->viewClass();
    $shuter = false;
-   if(isset($_GET['class_id']) && isset($_GET['batch_id']) && isset($_GET['batch_id'])){
+   if(isset($_GET['class_id']) && isset($_GET['batch_id']) && isset($_GET['date'])){
        $class_id = $_GET['class_id'];
        $batch_id = $_GET['batch_id'];
        $date = $_GET["date"];

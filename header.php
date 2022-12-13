@@ -129,6 +129,8 @@ if(!isset($_SESSION['user_id'])){
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
                         <a class="collapse-item <?php if($sub_page == 'view_attendance'){echo 'active';}?>" href="take-attandence.php">Take Attendance</a>
+
+                        <a class="collapse-item <?php if($sub_page == 'view_present'){echo 'active';}?>" href="view-present.php">View Present</a>
                     </div>
                 </div>
             </li>

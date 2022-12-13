@@ -212,6 +212,16 @@
                 return false;
             }
         }
+        //presentView
+        public function presentView($batch_id,$class_id){
+            $this->sql = "SELECT * FROM `present` WHERE batch_id = '$batch_id' AND class_id = '$class_id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
 
     }
 
