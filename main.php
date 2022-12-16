@@ -222,6 +222,18 @@
                 return false;
             }
         }
+        //presentDelete
+        public function presentDelete($id){
+            $id =$id;
+            $this->sql = "DELETE FROM `present` WHERE p_id = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
 
     }
 

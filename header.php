@@ -131,6 +131,8 @@ if(!isset($_SESSION['user_id'])){
                         <a class="collapse-item <?php if($sub_page == 'view_attendance'){echo 'active';}?>" href="take-attandence.php">Take Attendance</a>
 
                         <a class="collapse-item <?php if($sub_page == 'view_present'){echo 'active';}?>" href="view-present.php">View Present</a>
+
+                        <a class="collapse-item <?php if($sub_page == 'all_present'){echo 'active';}?>" href="all-present.php">All Present</a>
                     </div>
                 </div>
             </li>
