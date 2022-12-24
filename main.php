@@ -132,6 +132,36 @@
                 return false;
             }
         }
+        //batch update 
+        public function updateBatch($id,$batch_id,$decription){
+            $this->sql = "UPDATE `batch` SET `batch_id`='$batch_id',`description`='$decription' WHERE batch_id = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //check batch id use or not
+        public function checkInclude($batchId){
+            $this->sql = "SELECT * FROM `student` WHERE batch_id = '$batchId'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //delete batch
+        public function batchDelete($id){
+            $this->sql = "DELETE FROM `batch` WHERE batch_id = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result){
+                return true;
+            }else{
+                return false;
+            }
+        }
         //add class
         public function addClass($class_name,$description){
             $this->sql = "INSERT INTO `class`(`class_name`, `class_description`) VALUES ('$class_name','$description')";
@@ -233,6 +263,7 @@
                 return false;
             }
         }
+        
 
 
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2022 at 12:26 AM
+-- Generation Time: Dec 24, 2022 at 01:48 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -88,8 +88,10 @@ CREATE TABLE `present` (
 
 INSERT INTO `present` (`p_id`, `present`, `batch_id`, `class_id`, `p_date`) VALUES
 (1, '20180701,20180702,20180703,20180704,20180705', 2018, 7, '2022-12-13'),
-(2, '20180701,20180703,20180704,20180705', 2018, 7, '2022-12-14'),
-(3, '20180701,20180702,20180704,20180705', 2018, 7, '2022-12-15');
+(2, '20180701,20180702,20180703,20180704,20180705', 2018, 7, '2022-12-14'),
+(3, '20180701,20180702,20180704,20180705', 2018, 7, '2022-12-15'),
+(5, '20180801,20180802,20180803,20180804', 2018, 8, '2022-12-12'),
+(6, '20180701,20180702,20180703,20180704', 2018, 7, '2022-12-23');
 
 -- --------------------------------------------------------
 
@@ -208,7 +210,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `present`
 --
 ALTER TABLE `present`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `teacher`
