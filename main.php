@@ -162,9 +162,49 @@
                 return false;
             }
         }
+        //check class id use or not
+        public function checkClassInclude($classId){
+            $this->sql = "SELECT * FROM `student` WHERE class_id = '$classId'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
         //add class
         public function addClass($class_name,$description){
             $this->sql = "INSERT INTO `class`(`class_name`, `class_description`) VALUES ('$class_name','$description')";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //update class
+        public function updateClass($id,$class_name,$description){
+            $this->sql = "UPDATE `class` SET `class_name`='$class_name',`class_description`='$description' WHERE class_id = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //find class
+        public function findClass($classId){
+            $this->sql = "SELECT * FROM `class` WHERE class_id = '$classId'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //find class
+        public function deleteClass($classId){
+            $this->sql = "DELETE FROM `class` WHERE class_id = '$classId'";
             $this->result = $this->con->query($this->sql);
             if($this->result == true){
                 return true;
