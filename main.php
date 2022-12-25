@@ -242,12 +242,42 @@
                 return false;
             }
         }
-
+        //view student
         public function viewStudent(){
             $this->sql = "SELECT s.s_id,s.s_name,s.s_father,s.s_mother,s.phone,b.batch_id,c.class_name FROM student as s INNER JOIN batch AS b ON s.batch_id = b.batch_id INNER JOIN class as c on s.class_id = c.class_id";
             $this->result = $this->con->query($this->sql);
             if($this->result == true){
                 return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //findStudent by id
+        public function findStudentById($id){
+            $this->sql = "SELECT * FROM `student` WHERE `s_id` = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return $this->result;
+            }else{
+                return false;
+            }
+        }
+        //update student
+        public function updateStudent($id,$name,$father,$mother,$batch_id,$class_id,$phone){
+            $this->sql = "UPDATE `student` SET `s_name`='$name',`s_father`='$father',`s_mother`='$mother',`batch_id`='$batch_id',`class_id`='$class_id',`phone`='$phone' WHERE `s_id` = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //delete student
+        public function deleteStudent($id){
+            $this->sql = "DELETE FROM `student` WHERE `s_id` = '$id'";
+            $this->result = $this->con->query($this->sql);
+            if($this->result == true){
+                return true;
             }else{
                 return false;
             }

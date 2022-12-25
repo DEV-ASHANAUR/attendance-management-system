@@ -31,6 +31,23 @@
                 header("location:view-class.php"); 
             }
         }
+        if($_POST["up"] == "student"){
+            $id = $_POST["id"];
+            $name = $_POST['name'];
+            $father = $_POST['father'];
+            $mother = $_POST['mother'];
+            $batch_id = $_POST['batch_id'];
+            $class_id = $_POST['class_id'];
+            $phone = $_POST['phone'];
+            $status = $obj->updateStudent($id,$name,$father,$mother,$batch_id,$class_id,$phone);
+            if($status == true){
+                Flass_data::addTeacher('Student Updated SuccessFully!');
+                header("location:view-student.php");
+            }else{
+                Flass_data::teacherError('Something Went Worng!');
+                header("location:view-student.php"); 
+            }
+        }
     }else{
         header("location:index.php");
     }

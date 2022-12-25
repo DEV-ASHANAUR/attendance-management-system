@@ -9,6 +9,26 @@
     $class = $obj->viewClass();
     $data = $obj->viewStudent();
 
+    $shuter = false;
+
+    if(isset($_GET["id"])){
+        $shuter = true;
+        $id = $_GET['id'];
+
+        $find_student = $obj->findStudentById($id);
+        if($find_student->num_rows>0){
+            while($row = $find_student->fetch_object()){
+                $s_id = $row->s_id;
+                $s_name = $row->s_name;
+                $s_father = $row->s_father;
+                $s_mother = $row->s_mother;
+                $batch_id = $row->batch_id;
+                $class_id = $row->class_id;
+                $phone = $row->phone;
+            }
+        }
+    }
+
 ?>
 
 <!-- Begin Page Content -->
@@ -18,62 +38,125 @@
     <h1 class="h3 mb-4 text-gray-800">Manage Student</h1>
 
     <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Add Student</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"><?php if($shuter == true){echo "Update Student";}else{echo "Add Student"; }?></h6>
                 </div>
                 <div class="card-body">
-                    <form action="add-student.php" method="post">
-                        <div class="form-group">
-                            <label for="name">Student Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Student Name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Father's Name</label>
-                            <input type="text" name="father" class="form-control" placeholder="Father's Name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Mother's Name</label>
-                            <input type="text" name="mother" class="form-control" placeholder="Mother's Name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="class">Select Batch</label>
-                            <select name="batch_id" class="form-control" id="class" required>
-                                <?php
-                                    if($batch->num_rows>0){
-                                        while($bat = $batch->fetch_object()){
-                                            ?>
-                                                <option value="<?php echo $bat->batch_id; ?>"><?php echo $bat->batch_id; ?></option>
+                    <?php
+                        if($shuter == true){
+                            ?>
+                                <form action="update.php" method="post">
+                                    <div class="form-group">
+                                        <label for="name">Student Name</label>
+                                        <input type="text" name="name" value="<?php echo $s_name;?>" class="form-control" placeholder="Student Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Father's Name</label>
+                                        <input type="text" name="father" value="<?php echo $s_father;?>" class="form-control" placeholder="Father's Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Mother's Name</label>
+                                        <input type="text" name="mother" value="<?php echo $s_mother;?>" class="form-control" placeholder="Mother's Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="class">Select Batch</label>
+                                        <select name="batch_id" class="form-control" id="class" required>
                                             <?php
-                                        }
-                                    }
-                                ?>
-                                
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="batch">Select Class</label>
-                            <select name="class_id" class="form-control" id="batch">
+                                                if($batch->num_rows>0){
+                                                    while($bat = $batch->fetch_object()){
+                                                        ?>
+                                                            <option <?php if($bat->batch_id == $batch_id){echo "selected";} ?> value="<?php echo $bat->batch_id; ?>"><?php echo $bat->batch_id; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="batch">Select Class</label>
+                                        <select name="class_id" class="form-control" id="batch">
+                                        <?php
+                                                if($class->num_rows>0){
+                                                    while($cal = $class->fetch_object()){
+                                                        ?>
+                                                            <option <?php if($cal->class_id == $class_id){echo "selected";} ?> value="<?php echo $cal->class_id; ?>"><?php echo $cal->class_name; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone Number</label>
+                                        <input type="text" name="phone" value="<?php echo $phone;?>" class="form-control" placeholder="Phone Number" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" name="up" value="student" />
+                                        <input type="hidden" name="id" value="<?php echo $s_id ?>" />
+                                        <input type="submit" name="submit" value="Update" class="btn btn-success"  />
+                                        <a class="btn btn-danger" href="view-student.php">Cancle</a>
+                                    </div>
+                                </form>
                             <?php
-                                    if($class->num_rows>0){
-                                        while($cal = $class->fetch_object()){
-                                            ?>
-                                                <option value="<?php echo $cal->class_id; ?>"><?php echo $cal->class_name; ?></option>
+                        }else{
+                            ?>
+                                <form action="add-student.php" method="post">
+                                    <div class="form-group">
+                                        <label for="name">Student Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Student Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Father's Name</label>
+                                        <input type="text" name="father" class="form-control" placeholder="Father's Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Mother's Name</label>
+                                        <input type="text" name="mother" class="form-control" placeholder="Mother's Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="class">Select Batch</label>
+                                        <select name="batch_id" class="form-control" id="class" required>
                                             <?php
-                                        }
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Phone Number</label>
-                            <input type="text" name="phone" class="form-control" placeholder="Phone Number" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-success"  />
-                        </div>
-                    </form>
+                                                if($batch->num_rows>0){
+                                                    while($bat = $batch->fetch_object()){
+                                                        ?>
+                                                            <option value="<?php echo $bat->batch_id; ?>"><?php echo $bat->batch_id; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="batch">Select Class</label>
+                                        <select name="class_id" class="form-control" id="batch">
+                                        <?php
+                                                if($class->num_rows>0){
+                                                    while($cal = $class->fetch_object()){
+                                                        ?>
+                                                            <option value="<?php echo $cal->class_id; ?>"><?php echo $cal->class_name; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone Number</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="Phone Number" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" name="submit" class="btn btn-success"  />
+                                    </div>
+                                </form>
+                            <?php
+                        }
+                    ?>
+                    
                 </div>
             </div>
         </div>
@@ -142,8 +225,8 @@
                                                     <td><?php echo $row->class_name; ?></td>
                                                     <td><?php echo $row->phone; ?></td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-primary my-1">Update</a>
-                                                        <a href="#" class="btn btn-sm btn-danger my-1">Delete</a>
+                                                        <a href="view-student.php?id=<?php echo $row->s_id;?>" class="btn btn-sm btn-primary my-1">Update</a>
+                                                        <a onclick="javascript: return confirm('Are You Sure You Want To Delete This Data?');" href="delete-student.php?id=<?php echo $row->s_id; ?>" class="btn btn-sm btn-danger my-1">Delete</a>
                                                     </td>
                                                 </tr>
                                             <?php
