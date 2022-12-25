@@ -4,6 +4,8 @@ include "Flash_data.php";
 if(!isset($_SESSION['user_id'])){
     header('location:login.php');
 }
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role'];
 
 ?>
 
@@ -18,7 +20,7 @@ if(!isset($_SESSION['user_id'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Attendance - Dashboard</title>
+    <title>Smart School - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -72,7 +74,10 @@ if(!isset($_SESSION['user_id'])){
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <?php
+            if($role == 1){
+                ?>
+                <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-user"></i>
@@ -86,11 +91,14 @@ if(!isset($_SESSION['user_id'])){
                     </div>
                 </div>
             </li>
+                <?php
+            }
+            ?>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-list"></i>
                     <span>Manage Class</span>
                 </a>
                 <div id="collapseThree" class="collapse <?php if($page == 'manage_class'){echo 'show';}?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -100,7 +108,6 @@ if(!isset($_SESSION['user_id'])){
 
                         <a class="collapse-item <?php if($sub_page == 'view_class'){echo 'active';}?>" href="view-class.php">Class</a>
 
-                        
                     </div>
                 </div>
             </li>
@@ -122,7 +129,7 @@ if(!isset($_SESSION['user_id'])){
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-edit"></i>
                     <span>Manage Attendance</span>
                 </a>
                 <div id="collapseFive" class="collapse <?php if($page == 'manage_attendance'){echo 'show';}?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -172,7 +179,7 @@ if(!isset($_SESSION['user_id'])){
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                    <!-- <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -183,7 +190,7 @@ if(!isset($_SESSION['user_id'])){
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -239,10 +246,10 @@ if(!isset($_SESSION['user_id'])){
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <!-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
-                                </a>
+                                </a> -->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

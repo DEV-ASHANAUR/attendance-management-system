@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Smart School - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@
     <div class="container">
 
         <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center" style="height:100vh">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
@@ -44,6 +44,9 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+                            <div class="col-lg-5 d-none d-lg-block" style="background: url(img/bag-bg.jpg);
+                    background-position: center;
+                    background-size: cover;"></div>
                             <div class="col-lg-6 m-auto">
                                 <div class="p-5">
                                     <?php
@@ -96,7 +99,7 @@
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div> -->
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <!-- <a class="small" href="register.html">Create an Account!</a> -->
                                     </div>
                                 </div>
                             </div>

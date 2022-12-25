@@ -15,12 +15,14 @@
                     $name = $row->t_name;
                     $dbemail = $row->t_email;
                     $pass = $row->password;
+                    $role = $row->role;
                 }
                 $e_pw = md5($password);
                 if($e_pw === $pass){
                     $_SESSION['user_id'] = $uid;
                     $_SESSION['user_name'] = $name;
                     $_SESSION['user_email'] = $dbemail;
+                    $_SESSION['role'] = $role;
                     header('location:index.php');
                 }else{
                     Flass_data::auth('Your Email And Password is not Correct!');

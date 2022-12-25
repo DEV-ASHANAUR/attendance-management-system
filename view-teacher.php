@@ -92,7 +92,17 @@
                                                             <?php
                                                         }
                                                     ?>
-                                                    <a onclick="javascript: return confirm('Are You Sure You Want To Delete This Data?');" href="teacher-delete.php?id=<?php echo $row->t_id;?>" class="btn btn-sm btn-danger my-1">Delete</a>
+                                                    <?php 
+                                                        if($user_id == $row->t_id){
+                                                            ?>
+                                                                <a href="#" class="btn btn-sm btn-danger my-1" style="pointer-events: none;opacity:.6;">Delete</a>
+                                                            <?php
+                                                        }else{
+                                                            ?>
+                                                                <a onclick="javascript: return confirm('Are You Sure You Want To Delete This Data?');" href="teacher-delete.php?id=<?php echo $row->t_id;?>" class="btn btn-sm btn-danger my-1">Delete</a>
+                                                            <?php
+                                                        }
+                                                    ?>
                                                 </td>
                                             </tr>
                                             <?php
